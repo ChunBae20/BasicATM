@@ -10,6 +10,8 @@ public class UserData
     {
         Debug.Log("생성자 호출");
 
+        //진짜 UserData클래스에 들어있는 변수들 = 매개변수
+        //이번경우에는 이름이 같은 경우가 나옴 그리니 구분하기위해서this라고 쓰는것임
         this.userName = userName;
         this.userCash = userCash;
         this.userBalance = userBalance;
@@ -48,11 +50,39 @@ public class UserData
     //입금 
     //case1 현금을 내 통장으로 입금했을때 + 
     //case2 현금을 다른 사람의 통장으로 입금했을때 -
-    void Deposit()
+    //이런 노가다 말고 그냥 Deposit(30000)일케하면 한번에 캐시에서 3만빼고 밸런스에 3만더하는 로직도 짜봐서 테스트해보자
+    //튜플 진짜 야무지네
+    public (int,int) DepositOne()
     {
+        userCash -= 10_000;
+        userBalance += 10_000;
+        GameManager.Instance.Refresh(this);
+        return (userCash, userBalance);
+    }
+    public (int, int) DepositThree()
+    {
+        //애초에
+        userCash -= 30_000;
+        userBalance += 30_000;
+        GameManager.Instance.Refresh(this);
+        return (userCash, userBalance);
+    }
+    public (int, int) DepositFive()
+    {
+        userCash -= 50_000;
+        userBalance += 50_000;
+        GameManager.Instance.Refresh(this);
+        return (userCash, userBalance);
 
     }
+    public (int, int) CustomSend(int number)
+    {
 
+        userCash -= number;
+        userBalance += number;
+        GameManager.Instance.Refresh(this);
+        return (userCash, userBalance);
+    }
 
 
     void GetUserCash()

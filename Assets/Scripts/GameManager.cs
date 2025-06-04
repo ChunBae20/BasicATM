@@ -31,16 +31,29 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        //GetUserinfo();
-        userdata = new UserData("이주현",5000,100000);
+        userdata = new UserData("개발자",5001,100001);
         
 
     }
     void Update()
     {
-
+        Refresh(userdata);
     }
-    //
+
+    public void Refresh(UserData use)
+    {
+        showUserNameText.text = use.GetUserName();
+        showUserCashText.text = use.GetUserBasicCash().ToString("N0");
+        showUserBalanceText.text = use.GetUserBasicBalance().ToString("N0");
+    }
+
+}
+
+
+
+#region 더미데이터 
+/*
+//
     void GetUserinfo()
     {
         string userName = userdata.GetUserName();
@@ -51,5 +64,5 @@ public class GameManager : MonoBehaviour
         showUserCashText.text = userCash.ToString("N0");
         showUserBalanceText.text = userBalance.ToString("N0");
     }
-
-}
+*/
+#endregion

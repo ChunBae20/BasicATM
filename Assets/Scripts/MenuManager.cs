@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MenuManager : MonoBehaviour
+{
+    //메인 메뉴 오브젝트
+    public GameObject UserInfo;
+    public GameObject ButtonTwoSlice;
+
+    //입금 오브 젝트
+    public GameObject DepositFiveSlice;
+
+    //출금 오브젝트
+    public GameObject WithdrawFiveSlice;
+
+    //입금 메뉴 보이기 버튼
+    void ThisButtonDisplayDepositMenu()
+    {
+        UserInfo.SetActive(false);
+        ButtonTwoSlice.SetActive(false);
+        DepositFiveSlice.SetActive(true);
+        WithdrawFiveSlice.SetActive(false);
+    }
+
+    //출금 메뉴 보이기 버튼
+    void ThisButtonDisplayWithdrawMenu()
+    {
+        UserInfo.SetActive(false);
+        ButtonTwoSlice.SetActive(false);
+        DepositFiveSlice.SetActive(false);
+        WithdrawFiveSlice.SetActive(true);
+    }
+
+    
+    //뒤로가기 버튼
+    void ThisButtonCancelMenu()
+    {
+        UserInfo.SetActive(true);
+        ButtonTwoSlice.SetActive(true);
+        DepositFiveSlice.SetActive(false);
+        WithdrawFiveSlice.SetActive(false);
+    }
+}
