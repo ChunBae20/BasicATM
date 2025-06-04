@@ -27,20 +27,20 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if(userdata == null)
-        {
-            userdata = FindObjectOfType<UserData>();
-        }
+       
     }
     void Start()
     {
-        GetUserinfo();
+        //GetUserinfo();
+        userdata = new UserData("이주현",5000,100000);
+        
+
     }
     void Update()
     {
 
     }
-
+    //
     void GetUserinfo()
     {
         string userName = userdata.GetUserName();
