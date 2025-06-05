@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        userdata = new UserData("의문의 개발자 1",5001,100001000000000);
+        userdata = new UserData("의문의 개발자",50001,100_001);
         Refresh(userdata); 
 
 
