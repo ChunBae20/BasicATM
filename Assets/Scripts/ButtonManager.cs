@@ -53,6 +53,7 @@ public class ButtonManager : MonoBehaviour
             ulong nowCash = userdata.GetUserBasicCash();
             ulong nowBalance = userdata.GetUserBasicBalance();
 
+            GameManager.Instance.SaveUserData(); //저장
             Debug.Log($"[입금 버튼]{one}만원짜리 눌림,보유 현금:{nowCash},현재 잔고:{nowBalance}");
         }
         else
@@ -71,6 +72,7 @@ public class ButtonManager : MonoBehaviour
             ulong nowCash = userdata.GetUserBasicCash();
             ulong nowBalance = userdata.GetUserBasicBalance();
 
+            GameManager.Instance.SaveUserData();//저장
             Debug.Log($"[입금 버튼]{three}만원짜리 눌림,보유 현금:{nowCash},현재 잔고:{nowBalance}");
         }
         else
@@ -90,6 +92,7 @@ public class ButtonManager : MonoBehaviour
             ulong nowCash = userdata.GetUserBasicCash();
             ulong nowBalance = userdata.GetUserBasicBalance();
 
+            GameManager.Instance.SaveUserData();//저장
             Debug.Log($"[입금 버튼]{five}만원짜리 눌림,보유 현금:{nowCash},현재 잔고:{nowBalance}");
         }
         else
@@ -114,6 +117,7 @@ public class ButtonManager : MonoBehaviour
                 ulong nowCash = userdata.GetUserBasicCash();
                 ulong nowBalance = userdata.GetUserBasicBalance();
 
+                GameManager.Instance.SaveUserData();//저장
                 Debug.Log($"[직접 입력 입금]{number}만원 입금,보유 현금:{nowCash},현재 잔고:{nowBalance}");
             }
             else
@@ -152,6 +156,8 @@ public class ButtonManager : MonoBehaviour
             ulong nowCash = userdata.GetUserBasicCash();
             ulong nowBalance = userdata.GetUserBasicBalance();
 
+            GameManager.Instance.SaveUserData();//저장
+
             Debug.Log($"[출금 버튼]{one}만원짜리 눌림,보유 현금:{nowCash},현재 잔고:{nowBalance}");
         }
         else
@@ -171,6 +177,8 @@ public class ButtonManager : MonoBehaviour
             ulong nowCash = userdata.GetUserBasicCash();
             ulong nowBalance = userdata.GetUserBasicBalance();
 
+            GameManager.Instance.SaveUserData();//저장
+
             Debug.Log($"[출금 버튼]{three}만원짜리 눌림,보유 현금:{nowCash},현재 잔고:{nowBalance}");
         }
         else
@@ -189,6 +197,8 @@ public class ButtonManager : MonoBehaviour
 
             ulong nowCash = userdata.GetUserBasicCash();
             ulong nowBalance = userdata.GetUserBasicBalance();
+            
+            GameManager.Instance.SaveUserData();//저장
 
             Debug.Log($"[출금 버튼]{five}만원짜리 눌림,보유 현금:{nowCash},현재 잔고:{nowBalance}");
         }
@@ -214,6 +224,8 @@ public class ButtonManager : MonoBehaviour
                 ulong nowCash = userdata.GetUserBasicCash();
                 ulong nowBalance = userdata.GetUserBasicBalance();
 
+                GameManager.Instance.SaveUserData();//저장
+
                 Debug.Log($"[직접 입력 출금]{number}만원 입금,보유 현금:{nowCash},현재 잔고:{nowBalance}");
             }
             else
@@ -225,7 +237,30 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
+
+    public void DeleteAllDataAndRefresh()
+    {
+        /*
+        //이렇게만 하면 게임다시켜야 적용되니 리프레시도한번 시원하게
+        PlayerPrefs.DeleteAll();
+        //GameManager.Instance.SaveUserData();
+        GameManager.Instance.LoadUserData();
+        GameManager.Instance.Refresh(GameManager.Instance.userdata);
+        PlayerPrefs.Save();
+        Debug.Log("세상의 모든 정보를 리셋하고 초기값으로 되돌립니다.");
+        */
+
+        //리셋시키기
+        PlayerPrefs.DeleteAll();
+        GameManager.Instance.userdata = new UserData("의문의 개발자", 50001, 100_001);
+        //ui반영최신화
+        GameManager.Instance.Refresh(GameManager.Instance.userdata);
+        // ui최신화까지 완료하고 저장
+        GameManager.Instance.SaveUserData();
+
+        Debug.Log("세상의 모든 정보를 리셋하고 초기값으로 되돌립니다.");
+    }
     #endregion
 
-    
+
 }
