@@ -31,20 +31,25 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        userdata = new UserData("개발자",5001,100001);
-        
+        userdata = new UserData("의문의 개발자 1",5001,100001000000000);
+        Refresh(userdata); 
+
 
     }
+
+
     void Update()
     {
-        Refresh(userdata);
+
     }
 
     public void Refresh(UserData use)
     {
         showUserNameText.text = use.GetUserName();
-        showUserCashText.text = use.GetUserBasicCash().ToString("N0");
-        showUserBalanceText.text = use.GetUserBasicBalance().ToString("N0");
+        showUserCashText.text =  use.GetUserBasicCash().ToString("N0");
+        showUserBalanceText.text = $"balance {use.GetUserBasicBalance().ToString("N0")}";
+        //이게 밸런스 칸을 만든게 아니라 그냥 하드코딩으로 친거였어? 와 떼끄널러지아!
+        //showUserNameText.text = use.GetUserName(); 기존에는 balcance표시할 ui만들고 거기다가 또 따로 기본ㄱ밧넣고 호리즌탈 레이아웃 구룹 써서 함 ㄷㄷ
     }
 
 }

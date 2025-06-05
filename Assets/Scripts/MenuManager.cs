@@ -15,18 +15,18 @@ public class MenuManager : MonoBehaviour
     public GameObject WithdrawFiveSlice;
 
     //입금 메뉴 보이기 버튼
-    void ThisButtonDisplayDepositMenu()
+    public void ThisButtonDisplayDepositMenu()
     {
-        UserInfo.SetActive(false);
+        UserInfo.SetActive(true);
         ButtonTwoSlice.SetActive(false);
         DepositFiveSlice.SetActive(true);
         WithdrawFiveSlice.SetActive(false);
     }
 
     //출금 메뉴 보이기 버튼
-    void ThisButtonDisplayWithdrawMenu()
+    public void ThisButtonDisplayWithdrawMenu()
     {
-        UserInfo.SetActive(false);
+        UserInfo.SetActive(true);
         ButtonTwoSlice.SetActive(false);
         DepositFiveSlice.SetActive(false);
         WithdrawFiveSlice.SetActive(true);
@@ -34,7 +34,7 @@ public class MenuManager : MonoBehaviour
 
     
     //뒤로가기 버튼
-    void ThisButtonCancelMenu()
+    public void ThisButtonCancelMenu()
     {
         UserInfo.SetActive(true);
         ButtonTwoSlice.SetActive(true);

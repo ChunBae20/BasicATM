@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//using System.Numerics;
 [System.Serializable]
 public class UserData
 {
-
-    public UserData(string userName, int userCash, int userBalance)
+    //얘는 문자열로 해야되나보네
+    //BigInteger bigNumber = BigInteger.Parse("9999999999999999999999999999999999999999999999999999999999999");
+    public UserData(string userName, int userCash, ulong userBalance)
     {
         Debug.Log("생성자 호출");
 
@@ -23,7 +24,7 @@ public class UserData
     [SerializeField]
     private int userCash = 100_001; // 유저 현금
     [SerializeField]
-    private int userBalance = 50_001; // 유저 통장 잔액
+    private ulong userBalance = 50_001; // 유저 통장 잔액
 
     public string GetUserName()
     {
@@ -34,7 +35,7 @@ public class UserData
         return userCash;
     }
 
-    public int GetUserBasicBalance()
+    public ulong GetUserBasicBalance()
     {
         return userBalance;
     }
@@ -52,14 +53,14 @@ public class UserData
     //case2 현금을 다른 사람의 통장으로 입금했을때 -
     //이런 노가다 말고 그냥 Deposit(30000)일케하면 한번에 캐시에서 3만빼고 밸런스에 3만더하는 로직도 짜봐서 테스트해보자
     //튜플 진짜 야무지네
-    public (int,int) DepositOne()
+    public (int, ulong) DepositOne()
     {
         userCash -= 10_000;
         userBalance += 10_000;
         GameManager.Instance.Refresh(this);
         return (userCash, userBalance);
     }
-    public (int, int) DepositThree()
+    public (int, ulong) DepositThree()
     {
         //애초에
         userCash -= 30_000;
@@ -67,7 +68,7 @@ public class UserData
         GameManager.Instance.Refresh(this);
         return (userCash, userBalance);
     }
-    public (int, int) DepositFive()
+    public (int, ulong) DepositFive()
     {
         userCash -= 50_000;
         userBalance += 50_000;
@@ -75,11 +76,11 @@ public class UserData
         return (userCash, userBalance);
 
     }
-    public (int, int) CustomSend(int number)
+    public (int, ulong) CustomSend(int number)
     {
-
+        //
         userCash -= number;
-        userBalance += number;
+        userBalance += (ulong)number;
         GameManager.Instance.Refresh(this);
         return (userCash, userBalance);
     }
