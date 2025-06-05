@@ -5156,7 +5156,7 @@ GameObject:
   - component: {fileID: 1107956034}
   - component: {fileID: 1107956033}
   m_Layer: 5
-  m_Name: InputField (TMP) (1)
+  m_Name: Withdraw InputField (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5629,7 +5629,8 @@ MonoBehaviour:
     userCash: 0
     userBalance: 0
   noHaveMoney: {fileID: 1659452117}
-  userInputField: {fileID: 1620793079}
+  userDepositInputField: {fileID: 1620793079}
+  userWithdrawInputField: {fileID: 1107956033}
 --- !u!114 &1154853293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7337,7 +7338,7 @@ GameObject:
   - component: {fileID: 1620793080}
   - component: {fileID: 1620793079}
   m_Layer: 5
-  m_Name: InputField (TMP) (1)
+  m_Name: Deposit InputField (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

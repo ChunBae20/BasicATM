@@ -16,7 +16,11 @@ public class ButtonManager : MonoBehaviour
     //잔액부족시 나올 UI
     public GameObject noHaveMoney;
 
-    public TMP_InputField userInputField;
+    //입금 입력 필드전용
+    public TMP_InputField userDepositInputField;
+    //출금 입력 필드전용
+    public TMP_InputField userWithdrawInputField;
+
 
     void Start()
     {
@@ -41,14 +45,21 @@ public class ButtonManager : MonoBehaviour
     #region 입금 버튼
     public void DepositOneButton()
     {
+        
         if (CanDeposit(userdata, one))
         {
             GameManager.Instance.userdata.DepositButtonPreset(one);
-            Debug.Log($"{one}만원짜리 눌림");
+
+            ulong nowCash = userdata.GetUserBasicCash();
+            ulong nowBalance = userdata.GetUserBasicBalance();
+
+            Debug.Log($"[입금 버튼]{one}만원짜리 눌림,보유 현금:{nowCash},현재 잔고:{nowBalance}");
         }
         else
         {
             noHaveMoney.SetActive(true);
+            Debug.Log($"[입금 버튼]잔액이 부족합니다 팝업실행.");
+
         }
     }
     public void DepositThreeButton()
@@ -56,40 +67,60 @@ public class ButtonManager : MonoBehaviour
         if (CanDeposit(userdata, three))
         {
             GameManager.Instance.userdata.DepositButtonPreset(three);
-            Debug.Log($"{three}만원짜리 눌림");
+
+            ulong nowCash = userdata.GetUserBasicCash();
+            ulong nowBalance = userdata.GetUserBasicBalance();
+
+            Debug.Log($"[입금 버튼]{three}만원짜리 눌림,보유 현금:{nowCash},현재 잔고:{nowBalance}");
         }
         else
         {
             noHaveMoney.SetActive(true);
+            Debug.Log($"[입금 버튼]잔액이 부족합니다 팝업실행.");
+
         }
     }
     public void DepositFiveButton()
     {
+
         if (CanDeposit(userdata, five))
         {
             GameManager.Instance.userdata.DepositButtonPreset(five);
-            Debug.Log($"{five}만원짜리 눌림");
+
+            ulong nowCash = userdata.GetUserBasicCash();
+            ulong nowBalance = userdata.GetUserBasicBalance();
+
+            Debug.Log($"[입금 버튼]{five}만원짜리 눌림,보유 현금:{nowCash},현재 잔고:{nowBalance}");
         }
         else
         {
             noHaveMoney.SetActive(true);
+            Debug.Log($"[입금 버튼]잔액이 부족합니다 팝업실행.");
+
         }
     }
 
     public void DepositCutomButton()
     {
-        string customSendMoney = userInputField.text;
+
+        string customSendMoney = userDepositInputField.text;
 
         if(ulong.TryParse(customSendMoney,out ulong number))
         {
             if (CanDeposit(userdata, number))
             {
                 GameManager.Instance.userdata.CustomDepositSend(number);
-                Debug.Log($"{number}만원 입금");
+
+                ulong nowCash = userdata.GetUserBasicCash();
+                ulong nowBalance = userdata.GetUserBasicBalance();
+
+                Debug.Log($"[직접 입력 입금]{number}만원 입금,보유 현금:{nowCash},현재 잔고:{nowBalance}");
             }
             else
             {
                 noHaveMoney.SetActive(true);
+                Debug.Log($"[직접 입력 입금]잔액이 부족합니다 팝업실행.");
+
             }
         }
     }
@@ -112,69 +143,89 @@ public class ButtonManager : MonoBehaviour
     #region 출금버튼
     public void WithDrawOneButton()
     {
+
+
         if (CanWithdraw(userdata, one))
         {
             GameManager.Instance.userdata.WithdrawButtonpreset(one);
-            Debug.Log($"{one}만원짜리 눌림");
+
+            ulong nowCash = userdata.GetUserBasicCash();
+            ulong nowBalance = userdata.GetUserBasicBalance();
+
+            Debug.Log($"[출금 버튼]{one}만원짜리 눌림,보유 현금:{nowCash},현재 잔고:{nowBalance}");
         }
         else
         {
             noHaveMoney.SetActive(true);
+            Debug.Log($"[출금 버튼]잔액이 부족합니다 팝업실행.");
+
         }
     }
     public void WithDrawThreeButton()
     {
+
         if (CanWithdraw(userdata, three))
         {
             GameManager.Instance.userdata.WithdrawButtonpreset(three);
-            Debug.Log($"{three}만원짜리 눌림");
+
+            ulong nowCash = userdata.GetUserBasicCash();
+            ulong nowBalance = userdata.GetUserBasicBalance();
+
+            Debug.Log($"[출금 버튼]{three}만원짜리 눌림,보유 현금:{nowCash},현재 잔고:{nowBalance}");
         }
         else
         {
             noHaveMoney.SetActive(true);
+            Debug.Log($"[출금 버튼]잔액이 부족합니다 팝업실행.");
+
         }
     }
     public void WithDrawFiveButton()
     {
+
         if (CanWithdraw(userdata, five))
         {
             GameManager.Instance.userdata.WithdrawButtonpreset(five);
-            Debug.Log($"{five}만원짜리 눌림");
+
+            ulong nowCash = userdata.GetUserBasicCash();
+            ulong nowBalance = userdata.GetUserBasicBalance();
+
+            Debug.Log($"[출금 버튼]{five}만원짜리 눌림,보유 현금:{nowCash},현재 잔고:{nowBalance}");
         }
         else
         {
             noHaveMoney.SetActive(true);
+            Debug.Log($"[출금 버튼]잔액이 부족합니다 팝업실행.");
+
         }
     }
 
     public void WithDrawCutomButton()
     {
-        string customSendMoney = userInputField.text;
+
+        string customSendMoney = userWithdrawInputField.text;
 
         if (ulong.TryParse(customSendMoney, out ulong number))
         {
             if (CanWithdraw(userdata, number))
             {
                 GameManager.Instance.userdata.CustomWithdrawSend(number);
-                Debug.Log($"{number}만원 입금");
+
+                ulong nowCash = userdata.GetUserBasicCash();
+                ulong nowBalance = userdata.GetUserBasicBalance();
+
+                Debug.Log($"[직접 입력 출금]{number}만원 입금,보유 현금:{nowCash},현재 잔고:{nowBalance}");
             }
             else
             {
                 noHaveMoney.SetActive(true);
+                Debug.Log($"[직접 입력 출금]잔액이 부족합니다 팝업실행.");
+
             }
         }
     }
 
     #endregion
 
-    //bool값을 넘기는 함수를 판정해야하는데
-    //현재 현금>현재 통장잔액 / 트루면 *입금* 가능/ 현재 현금잔액 >= 선택한 입금 값
-    //현재 현금<현재 통장잔액 / 트루면 *출금* 가능/ 현재 통장잔액 >= 선택한 출금 값
-
-    //근데 데이터는 게임매니저에 있는데 게임매니저에서 해야하는거 아닌가?
-    //아 아니네 이걸 여기서 하는게 아니라 버튼로직에서 해야하는거 아닌가?
-    //현재 현금잔액 >= 선택한 입금 값  (입금가능)
     
-    
-    //현재 통장잔액 >= 선택한 출금 값  (출금가능)
 }

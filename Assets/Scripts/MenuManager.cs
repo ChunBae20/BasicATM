@@ -45,12 +45,7 @@ public class MenuManager : MonoBehaviour
         WithdrawFiveSlice.SetActive(false);
     }
 
-    /*
-    public void NoHaveMoneyMenu()
-    {
-        NoHaveMoneyMenuUI.SetActive(true);
-    }
-    */
+    
     public void NoHaveMoneyMenuAccept()
     {
         NoHaveMoneyMenuUI.SetActive(false);
