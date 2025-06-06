@@ -143,6 +143,8 @@ public class ButtonManager : MonoBehaviour
             return false;
         }
     }
+
+    //입금판정
     //출금 버튼
     #region 출금버튼
     public void WithDrawOneButton()
