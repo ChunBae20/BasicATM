@@ -254,7 +254,7 @@ public class ButtonManager : MonoBehaviour
 
         //리셋시키기
         PlayerPrefs.DeleteAll();
-        GameManager.Instance.userdata = new UserData("의문의 개발자", 50001, 100_001);
+        GameManager.Instance.userdata.Set(GameManager.Instance.userdata.GetUserName(), 50001, 100_001);
         //ui반영최신화
         GameManager.Instance.Refresh(GameManager.Instance.userdata);
         // ui최신화까지 완료하고 저장
