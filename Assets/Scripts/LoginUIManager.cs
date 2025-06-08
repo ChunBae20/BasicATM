@@ -135,9 +135,11 @@ public class LoginUIManager : MonoBehaviour
                 //ControlErrorReason.text = "님아 이거 중복아이디임 고치셈";
                 
 
-                PlayerPrefs.SetString($"ID/{newUserID}", necessarySignUpID.text);
-                PlayerPrefs.SetString($"ID/{newUserID}/PW", necessarySignUpPassword.text);
-                PlayerPrefs.SetString($"ID/{newUserID}/NM", necessarySignUpName.text);
+                PlayerPrefs.SetString($"ID/{newUserID}", necessarySignUpID.text); //아이디
+                PlayerPrefs.SetString($"ID/{newUserID}/PW", necessarySignUpPassword.text); //패스워드
+                PlayerPrefs.SetString($"ID/{newUserID}/NM", necessarySignUpName.text); //이름
+                PlayerPrefs.SetString($"ID/{newUserID}/UserCash", "50005"); //기본 현금
+                PlayerPrefs.SetString($"ID/{newUserID}/UserBalance", "100005"); //기본 통장 잔고
 
                 userList += "ID:" + newUserID + "PW:" + newUserPW+";";
                 PlayerPrefs.SetString("UserList", userList);

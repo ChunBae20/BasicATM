@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     //  PlayerPrefs.set타입(키,값);//스트링 인트 float로만 저장가능하므로 다른타입은 string변환해야함
     public void SaveUserData()
     {
-        PlayerPrefs.SetString($"ID/{nowLoginID}/UserName", userData.GetUserName());
+        PlayerPrefs.SetString($"ID/{nowLoginID}/UserNM", userData.GetUserName());
         PlayerPrefs.SetString($"ID/{nowLoginID}/UserCash", userData.GetUserBasicCash().ToString());
         PlayerPrefs.SetString($"ID/{nowLoginID}/UserBalance", userData.GetUserBasicBalance().ToString());
         PlayerPrefs.Save();
@@ -62,13 +62,13 @@ public class GameManager : MonoBehaviour
         nowLoginID = userID;
         //여기세팅값은 없을때만 이렇게 값을 반환하나보네
         //ulong을 스트링으로 감싼걸
-        string name = PlayerPrefs.GetString($"ID/{userID}/UserName", "의문의 개발자2");
+        string name = PlayerPrefs.GetString($"ID/{userID}/NM", "의문의 개발자가 보인다는건 뭔가 잘못됐다는것임");
         string cashStr = PlayerPrefs.GetString($"ID/{userID}/UserCash", "100002");
         string balanceStr = PlayerPrefs.GetString($"ID/{userID}/UserBalance", "50002");
 
         //다시 ulong으로 변환
-        ulong cash = ulong.Parse(cashStr);
-        ulong balance = ulong.Parse(balanceStr);
+        ulong cash = ulong.Parse(PlayerPrefs.GetString($"ID/{userID}/UserCash", "0"));
+        ulong balance = ulong.Parse(PlayerPrefs.GetString($"ID/{userID}/UserBalance", "0"));
 
         userData.Set(name, cash, balance);
         Refresh(userData);

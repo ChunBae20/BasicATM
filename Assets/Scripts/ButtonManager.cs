@@ -254,7 +254,7 @@ public class ButtonManager : MonoBehaviour
 
         //리셋시키기
         PlayerPrefs.DeleteAll();
-        GameManager.Instance.userData.Set(GameManager.Instance.userData.GetUserName(), 50001, 100_001);
+        GameManager.Instance.userData.Set(GameManager.Instance.userData.GetUserName(), 50_009, 100_009); //세이브시 실행
         //ui반영최신화
         GameManager.Instance.Refresh(GameManager.Instance.userData);
         // ui최신화까지 완료하고 저장
