@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.Windows;
+using System;
+using System.Linq;
 
 
 public class LoginUIManager : MonoBehaviour
@@ -110,9 +112,15 @@ public class LoginUIManager : MonoBehaviour
 
         bool canSignUp = CanSignUp();
 
-        if(canSignUp==true)
+        if (canSignUp==true)
         {
-            if (PlayerPrefs.HasKey("ID/ID") && PlayerPrefs.GetString("ID/ID") == necessarySignUpID.text)
+
+            string newUserID = necessarySignUpID.text;
+            string newUserPW = necessarySignUpPassword.text;
+            string newUserNM = necessarySignUpName.text;
+            string userList = PlayerPrefs.GetString("UserList", "");
+
+            if (PlayerPrefs.HasKey($"ID/{newUserID}/PW") )
             {
                 Debug.Log("이미 존재하는 아이디입니다.");
 
@@ -124,13 +132,26 @@ public class LoginUIManager : MonoBehaviour
             {
                 Debug.Log("회원 가입 성공");
                 SuccessPopUP.SetActive(true);
-                ControlErrorReason.text = "님아 이거 중복아이디임 고치셈";
+                //ControlErrorReason.text = "님아 이거 중복아이디임 고치셈";
+                
 
-                PlayerPrefs.SetString("ID/ID", necessarySignUpID.text);
-                PlayerPrefs.SetString("ID/PW", necessarySignUpPassword.text);
+                PlayerPrefs.SetString($"ID/{newUserID}", necessarySignUpID.text); //아이디
+                PlayerPrefs.SetString($"ID/{newUserID}/PW", necessarySignUpPassword.text); //패스워드
+                PlayerPrefs.SetString($"ID/{newUserID}/NM", necessarySignUpName.text); //이름
+                PlayerPrefs.SetString($"ID/{newUserID}/UserCash", "50005"); //기본 현금
+                PlayerPrefs.SetString($"ID/{newUserID}/UserBalance", "100005"); //기본 통장 잔고
 
-                Debug.Log("현재아이디: "+PlayerPrefs.GetString("ID/ID", ""));
-                Debug.Log("현재비밀번호: "+PlayerPrefs.GetString("ID/PW", ""));
+                userList += "ID:" + newUserID + "PW:" + newUserPW+";";
+                PlayerPrefs.SetString("UserList", userList);
+
+                //저장이 되고나서 배열을 해주니까 크기 변경 상관없나?
+                //이걸 makeid에서하는게아니라 Canlogin에서 불러와야하네?
+                //string[] sepUserList = userList.Split(';', StringSplitOptions.RemoveEmptyEntries);
+                //for (int i = 0; i < sepUserList.Length; i++) ;
+
+                Debug.Log("현재아이디: "+PlayerPrefs.GetString($"ID/{newUserID}", ""));
+                Debug.Log("현재비밀번호: "+PlayerPrefs.GetString($"ID/{newUserID}/PW", ""));
+                GameManager.Instance.userData = new UserData(newUserID, 50005, 100005);
             }
 
             //PlayerPrefs.DeleteKey("ID/ID");       // "ID/ID" 키 삭제
@@ -146,20 +167,67 @@ public class LoginUIManager : MonoBehaviour
             
         }
     }
-    
+              //  PlayerPrefs.SetString($"ID/{newUserID}", necessarySignUpID.text);
+    public bool TestCanLogin()
+    {
+        string userIDPWList = PlayerPrefs.GetString("UserList");
+        string[] sepUserList = userIDPWList.Split(';', StringSplitOptions.RemoveEmptyEntries);
+        
+
+        string loginUserID = loginInputID.text;
+        string loginUserPW = loginInputPW.text;
+
+        //userList += "ID:" + newUserID + "PW:" + newUserPW + ";"; 지금 이런식으로 저장됐잖아.
+
+
+        for (int i = 0; i < sepUserList.Length; i++)
+        {
+            if (sepUserList[i] == "ID:" + loginUserID + "PW:"+ loginUserPW)
+            {
+                return true;
+            }
+        }
+
+        Debug.Log("for문으로 아이디 패스워드 검색 해봤지만 일치하는 결과를 찾을수 없음");
+        return false;
+    }
     public bool CanLogin()
     {
+        string userIDPWList = PlayerPrefs.GetString("UserList");
+        string[] sepUserList = userIDPWList.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
+
+        string loginUserID = loginInputID.text;
+        string loginUserPW = loginInputPW.text;
+        string loginUserNM = PlayerPrefs.GetString($"ID/{loginUserID}/NM");
+
         //아이디 패스워드 두개다 입력했을 케이스
         // => 로그인 성공
         if (!string.IsNullOrWhiteSpace(loginInputID.text) && !string.IsNullOrWhiteSpace(loginInputPW.text))
         {
             //해당아이디가 존재하는지 && 비밀번호가 일치하는지 => 로그인성공
-            if (PlayerPrefs.HasKey("ID/ID") && PlayerPrefs.GetString("ID/ID") == loginInputID.text)
+            if (PlayerPrefs.HasKey($"ID/{loginUserID}"))
             {
-                if(PlayerPrefs.HasKey("ID/PW") && PlayerPrefs.GetString("ID/PW") == loginInputPW.text)
+                if(PlayerPrefs.HasKey($"ID/{loginUserID}/PW") )
                 {
-                    Debug.Log("로그인 성공!");
-                    return true;
+                    for (int i = 0; i < sepUserList.Length; i++)
+                    {
+                        if (sepUserList[i] == "ID:" + loginUserID + "PW:" + loginUserPW)
+                        {
+                            Debug.Log("for문을 돌린결과 성공적으로 해당 아이디 패스워드를 찾았어요,로그인 성공!");
+
+                            GameManager.Instance.nowLoginID = loginUserID;
+                            GameManager.Instance.LoadUserData(loginUserID);
+                            GameManager.Instance.Refresh(GameManager.Instance.userData);
+
+                            return true;
+                        }
+                    }
+
+                    Debug.Log("for문으로 아이디 패스워드 검색 해봤지만 일치하는 결과를 찾을수 없음");
+                    return false;
+
+
                 }
             }
             //비밀번호가 일치하지 않을경우
@@ -201,6 +269,7 @@ public class LoginUIManager : MonoBehaviour
     {
         if(CanLogin() == true)
         {
+            //GameManager.Instance.LoadUserData(nowLogI);
             Debug.Log("로그인이 성공했으니 해당 UI로 넘어갑니다...");
             LoginUICanvas.SetActive(false);
             ATMUICanvas.SetActive(true);
@@ -236,5 +305,5 @@ public class LoginUIManager : MonoBehaviour
     {
         SuccessPopUP.SetActive(false);
     }
-
+    
 }

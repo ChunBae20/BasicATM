@@ -63,6 +63,22 @@ public class UserData
         GameManager.Instance.Refresh(this);
         return (userCash, userBalance);
     }
+
+    //받는이가 접근할 함수 /userBalance를 더해준다.
+    [Tooltip("받는이가 접근할 함수 /userBalance를 더해준다.")]
+    public ulong SendGetMoney(ulong number)
+    {
+        userBalance += number;
+        return userBalance;
+    }
+    //보낸이가 접근할 함수 /userBalance를 빼준다.
+    [Tooltip("보낸이가 접근할 함수 /userBalance를 빼준다.")]
+    public ulong SendLoseMoney(ulong number)
+    {
+        userBalance -= number;
+        return userBalance;
+    }
+
     #endregion
 
     #region (출금)다른 스크립트에서 현재 cash 와 balance에 접근하는 함수
