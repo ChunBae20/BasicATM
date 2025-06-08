@@ -188,6 +188,10 @@ public class LoginUIManager : MonoBehaviour
     }
     public bool CanLogin()
     {
+        string userIDPWList = PlayerPrefs.GetString("UserList");
+        string[] sepUserList = userIDPWList.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
+
         string loginUserID = loginInputID.text;
         string loginUserPW = loginInputPW.text;
 
@@ -200,8 +204,19 @@ public class LoginUIManager : MonoBehaviour
             {
                 if(PlayerPrefs.HasKey($"ID/{loginUserID}/PW") )
                 {
-                    Debug.Log("로그인 성공!");
-                    return true;
+                    for (int i = 0; i < sepUserList.Length; i++)
+                    {
+                        if (sepUserList[i] == "ID:" + loginUserID + "PW:" + loginUserPW)
+                        {
+                            Debug.Log("for문을 돌린결과 성공적으로 해당 아이디 패스워드를 찾았어요,로그인 성공!");
+                            return true;
+                        }
+                    }
+
+                    Debug.Log("for문으로 아이디 패스워드 검색 해봤지만 일치하는 결과를 찾을수 없음");
+                    return false;
+
+
                 }
             }
             //비밀번호가 일치하지 않을경우
