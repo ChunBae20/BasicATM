@@ -1430,7 +1430,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 323186882}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1013664255}
+        m_TargetAssemblyTypeName: LoginUIManager, Assembly-CSharp
+        m_MethodName: Login
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &323186882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2830,7 +2842,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1013664255}
         m_TargetAssemblyTypeName: LoginUIManager, Assembly-CSharp
-        m_MethodName: SignUpPopUp
+        m_MethodName: MakeID
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3640,6 +3652,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964399628}
   m_CullTransparentMesh: 1
+--- !u!1 &972955191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 972955192}
+  m_Layer: 0
+  m_Name: LogInUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &972955192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972955191}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 687.5664, y: 533.9674, z: -345.39215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1013664254}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &985281880
 GameObject:
   m_ObjectHideFlags: 0
@@ -4078,7 +4122,7 @@ RectTransform:
   m_Children:
   - {fileID: 1432783668}
   - {fileID: 485689499}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 972955192}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4097,18 +4141,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd2dfa36bd55ee4b8e32f031edf8062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userData:
+    userName: 
+    userCash: 0
+    userBalance: 0
   startLoginUISetting: {fileID: 1861355027}
   signUpUIPopUp: {fileID: 1461030122}
   errorPopUp: {fileID: 516029696}
   SuccessPopUP: {fileID: 1017041802}
+  ErrorPopUpBlocked: {fileID: 516029696}
+  LoginUICanvas: {fileID: 972955191}
+  ATMUICanvas: {fileID: 2080053627}
+  ControlErrorReason: {fileID: 1552862641}
+  errorReason: {fileID: 799329691}
   necessarySignUpID: {fileID: 1885934165}
   necessarySignUpName: {fileID: 2116545908}
   necessarySignUpPassword: {fileID: 891907291}
   necessarySignUpPasswordConfirm: {fileID: 1635157545}
+  loginInputID: {fileID: 305384460}
+  loginInputPW: {fileID: 1423941580}
   isSignUpIDExist: 0
   isSignUpNameExist: 0
   isSignUpPasswordExist: 0
   isSignUpPasswordConfirmExist: 0
+  isLoginIDExist: 0
+  isLoginPWExist: 0
 --- !u!1 &1017041802
 GameObject:
   m_ObjectHideFlags: 0
@@ -4883,7 +4940,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.05
+  m_fontSize: 38.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7563,6 +7620,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077227911}
   m_CullTransparentMesh: 1
+--- !u!1 &2080053627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2080053628}
+  m_Layer: 0
+  m_Name: ATMUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2080053628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080053627}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 687.5664, y: 533.9674, z: -345.39215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6387027453096416665}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2105099294
 GameObject:
   m_ObjectHideFlags: 0
@@ -10040,6 +10129,23 @@ RectTransform:
   m_AnchoredPosition: {x: 167.5, y: -150}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2283212729253600315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5112593213128151673}
+  - component: {fileID: 8358768020001812966}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!224 &2321445074847915051
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12156,7 +12262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &4202492868522268691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13253,6 +13359,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!4 &5112593213128151673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283212729253600315}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 948.5458, y: 542.5959, z: 25.073364}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &5123439248749622907
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14758,7 +14879,7 @@ RectTransform:
   - {fileID: 5586325513502948886}
   - {fileID: 1624876419781393594}
   - {fileID: 7654856983408952579}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2080053628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -16729,6 +16850,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8358768020001812966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283212729253600315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7d8e9d58d3cc784eaed5628aaf242fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showUserNameText: {fileID: 2943663053290697723}
+  showUserCashText: {fileID: 4236625692553888977}
+  showUserBalanceText: {fileID: 499557745878098727}
+  userData:
+    userName: 
+    userCash: 0
+    userBalance: 0
 --- !u!114 &8368821145857812790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17466,7 +17606,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 1140854003}
   - {fileID: 459977273}
-  - {fileID: 1013664254}
   - {fileID: 1153449645}
-  - {fileID: 6387027453096416665}
   - {fileID: 1684322578}
+  - {fileID: 5112593213128151673}
+  - {fileID: 972955192}
+  - {fileID: 2080053628}

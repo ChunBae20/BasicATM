@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    public UserData userdata;
+    public UserData userData;
 
 
     void Awake()
@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            userdata = new UserData("의문의 개발자", 50001, 100_001);
-            Refresh(userdata);
+            userData = new UserData("의문의 개발자", 50001, 100_001);
+            Refresh(userData);
             SaveUserData();
         }
 
@@ -64,9 +64,9 @@ public class GameManager : MonoBehaviour
     //  PlayerPrefs.set타입(키,값);//스트링 인트 float로만 저장가능하므로 다른타입은 string변환해야함
     public void SaveUserData()
     {
-        PlayerPrefs.SetString("UserName", userdata.GetUserName());
-        PlayerPrefs.SetString("UserCash", userdata.GetUserBasicCash().ToString());
-        PlayerPrefs.SetString("UserBalance", userdata.GetUserBasicBalance().ToString());
+        PlayerPrefs.SetString("UserName", userData.GetUserName());
+        PlayerPrefs.SetString("UserCash", userData.GetUserBasicCash().ToString());
+        PlayerPrefs.SetString("UserBalance", userData.GetUserBasicBalance().ToString());
         PlayerPrefs.Save();
     }
 
@@ -82,8 +82,8 @@ public class GameManager : MonoBehaviour
         ulong cash = ulong.Parse(cashStr);
         ulong balance = ulong.Parse(balanceStr);
 
-        userdata.Set(name, cash, balance);
-        Refresh(userdata);
+        userData.Set(name, cash, balance);
+        Refresh(userData);
     }
 
 }

@@ -25,7 +25,7 @@ public class ButtonManager : MonoBehaviour
     void Start()
     {
         //기존에는 update에서 쓰니까 실시간으로 최신화가 된거구나.
-        userdata = GameManager.Instance.userdata;
+        userdata = GameManager.Instance.userData;
     }
 
     //입금 판정
@@ -48,7 +48,7 @@ public class ButtonManager : MonoBehaviour
         
         if (CanDeposit(userdata, one))
         {
-            GameManager.Instance.userdata.DepositButtonPreset(one);
+            GameManager.Instance.userData.DepositButtonPreset(one);
 
             ulong nowCash = userdata.GetUserBasicCash();
             ulong nowBalance = userdata.GetUserBasicBalance();
@@ -67,7 +67,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (CanDeposit(userdata, three))
         {
-            GameManager.Instance.userdata.DepositButtonPreset(three);
+            GameManager.Instance.userData.DepositButtonPreset(three);
 
             ulong nowCash = userdata.GetUserBasicCash();
             ulong nowBalance = userdata.GetUserBasicBalance();
@@ -87,7 +87,7 @@ public class ButtonManager : MonoBehaviour
 
         if (CanDeposit(userdata, five))
         {
-            GameManager.Instance.userdata.DepositButtonPreset(five);
+            GameManager.Instance.userData.DepositButtonPreset(five);
 
             ulong nowCash = userdata.GetUserBasicCash();
             ulong nowBalance = userdata.GetUserBasicBalance();
@@ -112,7 +112,7 @@ public class ButtonManager : MonoBehaviour
         {
             if (CanDeposit(userdata, number))
             {
-                GameManager.Instance.userdata.CustomDepositSend(number);
+                GameManager.Instance.userData.CustomDepositSend(number);
 
                 ulong nowCash = userdata.GetUserBasicCash();
                 ulong nowBalance = userdata.GetUserBasicBalance();
@@ -153,7 +153,7 @@ public class ButtonManager : MonoBehaviour
 
         if (CanWithdraw(userdata, one))
         {
-            GameManager.Instance.userdata.WithdrawButtonpreset(one);
+            GameManager.Instance.userData.WithdrawButtonpreset(one);
 
             ulong nowCash = userdata.GetUserBasicCash();
             ulong nowBalance = userdata.GetUserBasicBalance();
@@ -174,7 +174,7 @@ public class ButtonManager : MonoBehaviour
 
         if (CanWithdraw(userdata, three))
         {
-            GameManager.Instance.userdata.WithdrawButtonpreset(three);
+            GameManager.Instance.userData.WithdrawButtonpreset(three);
 
             ulong nowCash = userdata.GetUserBasicCash();
             ulong nowBalance = userdata.GetUserBasicBalance();
@@ -195,7 +195,7 @@ public class ButtonManager : MonoBehaviour
 
         if (CanWithdraw(userdata, five))
         {
-            GameManager.Instance.userdata.WithdrawButtonpreset(five);
+            GameManager.Instance.userData.WithdrawButtonpreset(five);
 
             ulong nowCash = userdata.GetUserBasicCash();
             ulong nowBalance = userdata.GetUserBasicBalance();
@@ -221,7 +221,7 @@ public class ButtonManager : MonoBehaviour
         {
             if (CanWithdraw(userdata, number))
             {
-                GameManager.Instance.userdata.CustomWithdrawSend(number);
+                GameManager.Instance.userData.CustomWithdrawSend(number);
 
                 ulong nowCash = userdata.GetUserBasicCash();
                 ulong nowBalance = userdata.GetUserBasicBalance();
@@ -254,9 +254,9 @@ public class ButtonManager : MonoBehaviour
 
         //리셋시키기
         PlayerPrefs.DeleteAll();
-        GameManager.Instance.userdata.Set(GameManager.Instance.userdata.GetUserName(), 50001, 100_001);
+        GameManager.Instance.userData.Set(GameManager.Instance.userData.GetUserName(), 50001, 100_001);
         //ui반영최신화
-        GameManager.Instance.Refresh(GameManager.Instance.userdata);
+        GameManager.Instance.Refresh(GameManager.Instance.userData);
         // ui최신화까지 완료하고 저장
         GameManager.Instance.SaveUserData();
 
