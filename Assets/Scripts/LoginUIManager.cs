@@ -117,6 +117,7 @@ public class LoginUIManager : MonoBehaviour
 
             string newUserID = necessarySignUpID.text;
             string newUserPW = necessarySignUpPassword.text;
+            string newUserNM = necessarySignUpName.text;
             string userList = PlayerPrefs.GetString("UserList", "");
 
             if (PlayerPrefs.HasKey($"ID/{newUserID}/PW") )
@@ -136,6 +137,7 @@ public class LoginUIManager : MonoBehaviour
 
                 PlayerPrefs.SetString($"ID/{newUserID}", necessarySignUpID.text);
                 PlayerPrefs.SetString($"ID/{newUserID}/PW", necessarySignUpPassword.text);
+                PlayerPrefs.SetString($"ID/{newUserID}/NM", necessarySignUpName.text);
 
                 userList += "ID:" + newUserID + "PW:" + newUserPW+";";
                 PlayerPrefs.SetString("UserList", userList);
@@ -194,6 +196,7 @@ public class LoginUIManager : MonoBehaviour
 
         string loginUserID = loginInputID.text;
         string loginUserPW = loginInputPW.text;
+        string loginUserNM = PlayerPrefs.GetString($"ID/{loginUserID}/NM");
 
         //아이디 패스워드 두개다 입력했을 케이스
         // => 로그인 성공
@@ -209,6 +212,10 @@ public class LoginUIManager : MonoBehaviour
                         if (sepUserList[i] == "ID:" + loginUserID + "PW:" + loginUserPW)
                         {
                             Debug.Log("for문을 돌린결과 성공적으로 해당 아이디 패스워드를 찾았어요,로그인 성공!");
+
+                            GameManager.Instance.userData=new UserData(loginUserNM, 50005, 100005);
+                            GameManager.Instance.Refresh(GameManager.Instance.userData);
+
                             return true;
                         }
                     }
