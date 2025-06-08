@@ -57,12 +57,25 @@ public class RemitManager : MonoBehaviour
             string nowID = GameManager.Instance.nowLoginID;
             //ulong senderBalance = ulong.Parse(PlayerPrefs.GetString($"ID/{nowID}/UserBalance", "0"));
             //참일경우 잔액을 검사
-
+            
             //현재 로그인 한 계정의 Balance와 보낼 금액을 검사
             //현재 로그인 한 계정의 Balance값 :   ulong nowBalance = PlayerPerfs.GetString($"ID/{nowID}UserBalance" 이렇게 하는게 아닌가? 이건가?
             ulong nowBalance = GameManager.Instance.userData.GetUserBasicBalance();
             if (ulong.TryParse(sendMoney, out ulong sendM))
             {
+                //송금대상이 나일케이스
+                if (whoTake == nowID)
+                {
+                    GameManager.Instance.userData.SendLoseMoney(sendM);
+                    Debug.Log($"{sendM}원 만큼 잃습니다");
+                    GameManager.Instance.userData.SendGetMoney(sendM);
+                    Debug.Log($"{sendM}원 만큼 얻습니다");
+
+                    GameManager.Instance.SaveUserData();//저장
+                    GameManager.Instance.Refresh(GameManager.Instance.userData);
+                    return;
+
+                }
                 if (nowBalance >= sendM)
                 {
                     //보낸 사람 돈 제거
