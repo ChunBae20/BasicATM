@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
+    public string nowLoginID;
+
     public UserData userData;
 
 
@@ -29,22 +31,7 @@ public class GameManager : MonoBehaviour
 
 
     }
-    void Start()
-    {
-        //아 어떡하지 튜터님이 이거 쓰라고 하셨는데이러면 매번 생성습 뭐지?아
-
-        if(PlayerPrefs.HasKey("UserName") && PlayerPrefs.HasKey("UserCash")&& PlayerPrefs.HasKey("UserBalance"))
-        {
-            LoadUserData();
-        }
-        else
-        {
-            userData = new UserData("의문의 개발자", 50001, 100_001);
-            Refresh(userData);
-            SaveUserData();
-        }
-
-    }
+    
 
 
     void Update()
@@ -64,19 +51,20 @@ public class GameManager : MonoBehaviour
     //  PlayerPrefs.set타입(키,값);//스트링 인트 float로만 저장가능하므로 다른타입은 string변환해야함
     public void SaveUserData()
     {
-        PlayerPrefs.SetString("UserName", userData.GetUserName());
-        PlayerPrefs.SetString("UserCash", userData.GetUserBasicCash().ToString());
-        PlayerPrefs.SetString("UserBalance", userData.GetUserBasicBalance().ToString());
+        PlayerPrefs.SetString($"ID/{nowLoginID}/UserName", userData.GetUserName());
+        PlayerPrefs.SetString($"ID/{nowLoginID}/UserCash", userData.GetUserBasicCash().ToString());
+        PlayerPrefs.SetString($"ID/{nowLoginID}/UserBalance", userData.GetUserBasicBalance().ToString());
         PlayerPrefs.Save();
     }
 
-    public void LoadUserData()
+    public void LoadUserData(string userID)
     {
+        nowLoginID = userID;
         //여기세팅값은 없을때만 이렇게 값을 반환하나보네
         //ulong을 스트링으로 감싼걸
-        string name = PlayerPrefs.GetString("UserName", "의문의 개발자2");
-        string cashStr = PlayerPrefs.GetString("UserCash", "100002");
-        string balanceStr = PlayerPrefs.GetString("UserBalance", "50002");
+        string name = PlayerPrefs.GetString($"ID/{userID}/UserName", "의문의 개발자2");
+        string cashStr = PlayerPrefs.GetString($"ID/{userID}/UserCash", "100002");
+        string balanceStr = PlayerPrefs.GetString($"ID/{userID}/UserBalance", "50002");
 
         //다시 ulong으로 변환
         ulong cash = ulong.Parse(cashStr);
@@ -103,5 +91,25 @@ public class GameManager : MonoBehaviour
         showUserCashText.text = userCash.ToString("N0");
         showUserBalanceText.text = userBalance.ToString("N0");
     }
+*/
+
+/*
+ void Start()
+    {
+        //아 어떡하지 튜터님이 이거 쓰라고 하셨는데이러면 매번 생성습 뭐지?아
+        
+        if(PlayerPrefs.HasKey("UserName") && PlayerPrefs.HasKey("UserCash")&& PlayerPrefs.HasKey("UserBalance"))
+        {
+            LoadUserData();
+        }
+        else
+        {
+            userData = new UserData("의문의 개발자", 50001, 100_001);
+            Refresh(userData);
+            SaveUserData();
+        }
+        
+    }
+
 */
 #endregion

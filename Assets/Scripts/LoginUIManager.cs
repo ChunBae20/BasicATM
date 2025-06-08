@@ -149,6 +149,7 @@ public class LoginUIManager : MonoBehaviour
 
                 Debug.Log("현재아이디: "+PlayerPrefs.GetString($"ID/{newUserID}", ""));
                 Debug.Log("현재비밀번호: "+PlayerPrefs.GetString($"ID/{newUserID}/PW", ""));
+                GameManager.Instance.userData = new UserData(newUserID, 50005, 100005);
             }
 
             //PlayerPrefs.DeleteKey("ID/ID");       // "ID/ID" 키 삭제
@@ -213,7 +214,8 @@ public class LoginUIManager : MonoBehaviour
                         {
                             Debug.Log("for문을 돌린결과 성공적으로 해당 아이디 패스워드를 찾았어요,로그인 성공!");
 
-                            GameManager.Instance.userData=new UserData(loginUserNM, 50005, 100005);
+                            GameManager.Instance.nowLoginID = loginUserID;
+                            GameManager.Instance.LoadUserData(loginUserID);
                             GameManager.Instance.Refresh(GameManager.Instance.userData);
 
                             return true;
@@ -265,6 +267,7 @@ public class LoginUIManager : MonoBehaviour
     {
         if(CanLogin() == true)
         {
+            //GameManager.Instance.LoadUserData(nowLogI);
             Debug.Log("로그인이 성공했으니 해당 UI로 넘어갑니다...");
             LoginUICanvas.SetActive(false);
             ATMUICanvas.SetActive(true);
