@@ -19,7 +19,6 @@ public class UserData
         this.userBalance = userBalance;
     }
 
-    //후에 시간남으면 내가만들어둔 시간시스템 건져와서 cash 다 decimal로 선언하고 이자같은거 실시간적용이나 코인한번 구현해보자
     [SerializeField]
     private string userName = "나는 개발자"; // 유저 이름
     [SerializeField]
@@ -87,6 +86,14 @@ public class UserData
         GameManager.Instance.Refresh(this);
         return (userCash, userBalance);
     }
+
+    public void Set(string userName,ulong userCash,ulong userBalance)
+    {
+        this.userName = userName;
+        this.userCash = userCash;
+        this.userBalance = userBalance;
+    }
+
 
     #region 기존 코드를 단 한줄로 줄일수 있다고?
     /*
