@@ -16,13 +16,22 @@ public class UIMainMenuIV : MonoBehaviour
     public TextMeshProUGUI moneyGold;
     public string outputStringGold;
 
+    public TextMeshProUGUI playerName_Text;
+    public TextMeshProUGUI playerjob_Text;
+    public TextMeshProUGUI playerLevel_Text;
+    public TextMeshProUGUI playerDes_Text;
+
+
+
+
+
     //아 c#은 int lon ulong 중 하나로 인식해야 new에 컴파일 해서 넣어주는구나
     //999_999_999_999_999_999_999_999_999_999_999_999_999_999_999_999 _언더바 사용하면 오류뜨네
-    BigInteger goldOutput = BigInteger.Parse("999999999999999999999999999999999999999999999999");
+    //BigInteger goldOutput = BigInteger.Parse("999999999999999999999999999999999999999999999999");
 
-    private static readonly string[] stringPreset = {
+    static readonly string[] stringPreset = {
         "", "K", "M", "B", "T", // 10^3 ~ 10^12
-        "aa", "ab", "ac", "ad", "ae", "af", "ag", "ah", "ai", "aj", "ak", "al" // 10^15 ~ 10^48
+        "aa", "ab", "ac", "ad", "ae", "af", "ag", "ah", "ai", "aj", "ak", "al","am","an","aO","ap","aq","ar","as","at","au","av","aw","ax","ay","az" // 10^15 ~ 10^48
     };
 
     public string CalGoldOutPut(BigInteger goldOutput)
@@ -46,16 +55,7 @@ public class UIMainMenuIV : MonoBehaviour
 
     void Start()
     {
-        BigInteger result;
-        if(BigInteger.TryParse(outputStringGold, out result))
-        {
-            moneyGold.text = CalGoldOutPut(result);
-        }
-        else
-        {
-            Debug.Log("잘못된 값이 입력되어 변환 실패");
-        }
-        //string resultMoney = CalGoldOutPut(ResultMoney);
+        SetMainUIText();
 
         openStatusButton.onClick.AddListener(OpenStatus);
         openInventoryButton.onClick.AddListener(OpenInventory);
@@ -84,6 +84,15 @@ public class UIMainMenuIV : MonoBehaviour
 
     }
 
+    void SetMainUIText()
+    {
+        playerName_Text.text = GameManagerIV.Instance.Player.GetBasicName();
+        playerjob_Text.text = GameManagerIV.Instance.Player.GetBasicJob();
+        playerLevel_Text.text = $"LV. {GameManagerIV.Instance.Player.GetBasicLevel().ToString()}";
+        playerDes_Text.text = GameManagerIV.Instance.Player.GetBasicDes();
+
+
+    }
 
     #region 출력테스트
     /*
@@ -102,6 +111,19 @@ public class UIMainMenuIV : MonoBehaviour
         {
             Debug.Log(CalGoldOutPut(val));
         }
+
+    BigInteger result;
+        if(BigInteger.TryParse(outputStringGold, out result))
+        {
+            moneyGold.text = CalGoldOutPut(result);
+        }
+        else
+        {
+            Debug.Log("잘못된 값이 입력되어 변환 실패");
+        }
+        //string resultMoney = CalGoldOutPut(ResultMoney);
+
+
 
         */
     #endregion
