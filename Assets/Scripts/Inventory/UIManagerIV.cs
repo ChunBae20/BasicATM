@@ -7,6 +7,9 @@ public class UIManagerIV : MonoBehaviour
 {
     public static UIManagerIV Instance;
 
+    //public CharacterIV character;
+
+
     [SerializeField]
     private UIMainMenuIV mainMenuUI;
     public UIMainMenuIV Mainmenu { get { return mainMenuUI; } }
@@ -14,6 +17,7 @@ public class UIManagerIV : MonoBehaviour
     [SerializeField]
     private UIStatusIV statusUI;
     public UIStatusIV StatusUI { get { return statusUI; } }
+
 
 
     [SerializeField]
@@ -43,14 +47,14 @@ public class UIManagerIV : MonoBehaviour
 
     public void OpenStatus()
     {
-        mainMenuUI.gameObject.SetActive(false);
+        mainMenuUI.gameObject.SetActive(true);
         statusUI.gameObject.SetActive(true);
         inventoryUI.gameObject.SetActive(false);
     }
 
     public void OpenInventory()
     {
-        mainMenuUI.gameObject.SetActive(false);
+        mainMenuUI.gameObject.SetActive(true);
         statusUI.gameObject.SetActive(false);
         inventoryUI.gameObject.SetActive(true);
     }
